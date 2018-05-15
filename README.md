@@ -1,4 +1,4 @@
-<p align="center"><img src="https://image.ibb.co/mHMgrm/snoophp.png" width="80"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png" width="80"/></p>
+<p align="center"><img src="https://image.ibb.co/mHMgrm/snoophp.png" width="80"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/2000px-Spotify_logo_with_text.svg.png" height="80"/></p>
 
 # SnooPHP Spotify
 
