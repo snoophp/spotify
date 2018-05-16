@@ -2,6 +2,8 @@
 
 namespace SnooPHP\Spotify;
 
+use SnooPHP\Cache\I_Cache;
+
 /**
  * Fake cache
  * 
