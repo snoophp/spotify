@@ -42,12 +42,12 @@ class Api
 	/**
 	 * @var string $cacheClass cache class
 	 */
-	protected $cacheClass = "SnooPHP\Spotify\NullCache";
+	protected $cacheClass;
 
 	/**
 	 * @var string $defaultCacheClass
 	 */
-	protected static $defaultCacheClass = "SnooPHP\Facebook\NullCache";
+	protected static $defaultCacheClass = "SnooPHP\Spotify\NullCache";
 
 	/**
 	 * @const ENDPOINT spotify api endpoint
@@ -180,5 +180,18 @@ class Api
 		$api = new static();
 		$api->token = $token;
 		return $api;
+	}
+
+	/**
+	 * Set or get default cache class for this session
+	 * 
+	 * @param string|null	$defaultCacheClass	cache full classname
+	 * 
+	 * @return string
+	 */
+	public static function defaultCacheClass($defaultCacheClass = null)
+	{
+		if ($defaultCacheClass) static::$defaultCacheClass = $defaultCacheClass;
+		return static::$defaultCacheClass;
 	}
 }
