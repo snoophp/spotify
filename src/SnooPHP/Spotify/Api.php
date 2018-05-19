@@ -78,8 +78,11 @@ class Api
 	public function query($query)
 	{
 		// If no access token, abort
-		if (!$this->token || empty($this->token->access_token))
+		if (!$this->token || empty($this->authToken()))
+		{
+			error_log("Spotify API: no access token specified!");
 			return false;
+		}
 		else
 			$token = $this->authToken();
 		
@@ -115,7 +118,11 @@ class Api
 		$uri = static::ENDPOINT_ACCOUNT."/api/token";
 
 		// Check cache
-		if ($record = $this->cacheClass::fetch($uri)) return $record;
+		if ($record = $this->cacheClass::fetch($uri))
+		{
+			$this->token = $record;
+			return $this->token;
+		}
 
 		// Make request
 		$curl = Post::withAuth(
