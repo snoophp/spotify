@@ -2,8 +2,8 @@
 
 namespace SnooPHP\Spotify;
 
-use SnooPHP\Http\Curl\Get;
-use SnooPHP\Http\Curl\Post;
+use SnooPHP\Curl\Get;
+use SnooPHP\Curl\Post;
 
 /**
  * Perform raw api requests or use dedicated methods
@@ -93,8 +93,8 @@ class Api
 		if ($record = $this->cacheClass::fetch("$uri|$token")) return $record;
 
 		// Make api request
-		$curl	= Get::withAuth($uri, $this->authToken());
-		if ($curl && $curl->success())
+		$curl = new Get($uri, ["Authorization" => $this->authToken()]);
+		if ($curl->success())
 		{
 			// Save record in cache and return it
 			$this->lastResult = $curl->content();
@@ -125,12 +125,12 @@ class Api
 		}
 
 		// Make request
-		$curl = Post::withAuth(
+		$curl = new Post(
 			$uri,
-			"Basic {$this->generateAppAuthHeader()}",
-			http_build_query(["grant_type" => "client_credentials"])
+			http_build_query(["grant_type" => "client_credentials"]),
+			["Authorization" => "Basic {$this->generateAppAuthHeader()}"]
 		);
-		if ($curl && $curl->success())
+		if ($curl->success())
 		{
 			$this->token = $this->cacheClass::store($uri, $curl->content());
 			return $this->token;
